@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config description="自动配置" xmlns:j="jelly:core">
+    <!-- mvn使用 -->
+
+    <group name="basic">
+        <property name="domain" defaultValue="www.roadjava.com" description="应用域名" />
+        <property name="workdir" defaultValue="/user/local/admin" description="应用部署路径" />
+        <property name="app.mode" defaultValue="dev" description="应用的部署状态（prd，test，dev）" />
+        <property name="zookeeper.server.ip" defaultValue="172.24.7.171" description="应用的部署状态（prd，test，dev）" />
+    </group>
+
+    <group name="spec-setting">
+        <property name="mysql.url" defaultValue="jdbc:mysql://localhost:3306/test_00" description="" />
+        <property name="mysql.user" defaultValue="root" description="" />
+        <property name="mysql.pwd" defaultValue="root" description="" />
+    </group>
+
+
+    <!-- ========================================================== -->
+    <!-- 生成配置文件的脚本。 -->
+    <!-- ========================================================== -->
+    <script>
+        <generate template="application.yml.vm" destfile="application.yml" charset="UTF-8"/>
+        <generate template="logback-spring.xml.vm" destfile="logback-spring.xml" charset="UTF-8"/>
+    </script>
+</config>

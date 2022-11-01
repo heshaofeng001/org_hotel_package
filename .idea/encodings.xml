@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/hotel-packages-biz-impl/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hotel-packages-biz/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hotel-packages-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hotel-packages-dal/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hotel-packages-model/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hotel-packages-start/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hotel-packages-web/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

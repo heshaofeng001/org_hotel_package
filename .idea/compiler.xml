@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="hotel-packages-core" />
+        <module name="hotel-packages-web" />
+        <module name="hotel-packages-biz" />
+        <module name="hotel-packages-facade" />
+        <module name="hotel-packages-model" />
+        <module name="hotel-packages-dal" />
+        <module name="hotel-packages-start" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="hotel-packages-biz-impl" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="hotel-packages-biz" options="-parameters" />
+      <module name="hotel-packages-biz-impl" options="-parameters" />
+      <module name="hotel-packages-core" options="-parameters" />
+      <module name="hotel-packages-dal" options="-parameters" />
+      <module name="hotel-packages-model" options="-parameters" />
+      <module name="hotel-packages-start" options="-parameters" />
+      <module name="hotel-packages-web" options="-parameters" />
+    </option>
+  </component>
+</project>
