@@ -8,4 +8,6 @@ public class CustomerDTO extends BaseDTO {
     private String customerId;
 
     private String status;
+
+    private String customerName;
 }

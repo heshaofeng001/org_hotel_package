@@ -3,7 +3,9 @@ package org.hotel.packages.dal.po;
 import java.util.Date;
 
 public class PackageInfoBO {
-    private Integer packageId;
+    private Integer id;
+
+    private String packageId;
 
     private String packageStatus;
 
@@ -19,11 +21,19 @@ public class PackageInfoBO {
 
     private Date checkOutDate;
 
-    public Integer getPackageId() {
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getPackageId() {
         return packageId;
     }
 
-    public void setPackageId(Integer packageId) {
+    public void setPackageId(String packageId) {
         this.packageId = packageId;
     }
 

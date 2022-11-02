@@ -132,6 +132,66 @@ public class PackageInfoBOExample {
             addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
 
+        public Criteria andIdIsNull() {
+            addCriterion("id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdIsNotNull() {
+            addCriterion("id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdEqualTo(Integer value) {
+            addCriterion("id =", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNotEqualTo(Integer value) {
+            addCriterion("id <>", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdGreaterThan(Integer value) {
+            addCriterion("id >", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("id >=", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdLessThan(Integer value) {
+            addCriterion("id <", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdLessThanOrEqualTo(Integer value) {
+            addCriterion("id <=", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdIn(List<Integer> values) {
+            addCriterion("id in", values, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNotIn(List<Integer> values) {
+            addCriterion("id not in", values, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdBetween(Integer value1, Integer value2) {
+            addCriterion("id between", value1, value2, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("id not between", value1, value2, "id");
+            return (Criteria) this;
+        }
+
         public Criteria andPackageIdIsNull() {
             addCriterion("package_id is null");
             return (Criteria) this;
@@ -142,52 +202,62 @@ public class PackageInfoBOExample {
             return (Criteria) this;
         }
 
-        public Criteria andPackageIdEqualTo(Integer value) {
+        public Criteria andPackageIdEqualTo(String value) {
             addCriterion("package_id =", value, "packageId");
             return (Criteria) this;
         }
 
-        public Criteria andPackageIdNotEqualTo(Integer value) {
+        public Criteria andPackageIdNotEqualTo(String value) {
             addCriterion("package_id <>", value, "packageId");
             return (Criteria) this;
         }
 
-        public Criteria andPackageIdGreaterThan(Integer value) {
+        public Criteria andPackageIdGreaterThan(String value) {
             addCriterion("package_id >", value, "packageId");
             return (Criteria) this;
         }
 
-        public Criteria andPackageIdGreaterThanOrEqualTo(Integer value) {
+        public Criteria andPackageIdGreaterThanOrEqualTo(String value) {
             addCriterion("package_id >=", value, "packageId");
             return (Criteria) this;
         }
 
-        public Criteria andPackageIdLessThan(Integer value) {
+        public Criteria andPackageIdLessThan(String value) {
             addCriterion("package_id <", value, "packageId");
             return (Criteria) this;
         }
 
-        public Criteria andPackageIdLessThanOrEqualTo(Integer value) {
+        public Criteria andPackageIdLessThanOrEqualTo(String value) {
             addCriterion("package_id <=", value, "packageId");
             return (Criteria) this;
         }
 
-        public Criteria andPackageIdIn(List<Integer> values) {
+        public Criteria andPackageIdLike(String value) {
+            addCriterion("package_id like", value, "packageId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdNotLike(String value) {
+            addCriterion("package_id not like", value, "packageId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdIn(List<String> values) {
             addCriterion("package_id in", values, "packageId");
             return (Criteria) this;
         }
 
-        public Criteria andPackageIdNotIn(List<Integer> values) {
+        public Criteria andPackageIdNotIn(List<String> values) {
             addCriterion("package_id not in", values, "packageId");
             return (Criteria) this;
         }
 
-        public Criteria andPackageIdBetween(Integer value1, Integer value2) {
+        public Criteria andPackageIdBetween(String value1, String value2) {
             addCriterion("package_id between", value1, value2, "packageId");
             return (Criteria) this;
         }
 
-        public Criteria andPackageIdNotBetween(Integer value1, Integer value2) {
+        public Criteria andPackageIdNotBetween(String value1, String value2) {
             addCriterion("package_id not between", value1, value2, "packageId");
             return (Criteria) this;
         }

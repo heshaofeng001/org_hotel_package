@@ -4,7 +4,7 @@ import org.hotel.packages.model.models.CustomerModel;
 
 public interface CustomerRepository {
 
-    int save(CustomerModel customer);
+    String save(CustomerModel customer);
 
     CustomerModel queryById(String id);
 }

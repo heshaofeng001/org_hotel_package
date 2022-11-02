@@ -4,13 +4,8 @@ import lombok.Data;
 import org.hotel.packages.facade.model.ToString;
 
 @Data
-public class Result<T> extends ToString {
+public class Result<T> extends BaseResult {
 
     private T data;
 
-    private boolean result;
-
-    private String errorCode;
-
-    private String errorMsg;
 }

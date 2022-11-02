@@ -4,19 +4,42 @@ server:
 spring:
   application:
     name: rmx-student-manage
+thymeleaf:
+  prefix: classpath:/templates/
+  encoding: UTF-8
+  cache: false
+  suffix: .html
+  content-type: text/html
+  webflux:
+    staticPathPattern: /static/**
   mvc:
     view:
       prefix: /
       suffix: .html
   cloud:
     zookeeper:
-      connect-string: 127.0.0.1:2181
+      connect-string: ${zookeeper.server.ip}:2181
       discovery:
         register: true
         enabled: true
         root: my-registry
         instanceHost: 127.0.0.1
-        instance-ssl-port: {{server.port}}
+        instance-ssl-port: 4003
+    gateway:
+      routes:
+        - id: student
+          uri: lb://rmx-student-manage
+          predicates:
+            - Path=/gateway/student/**
+          filters:
+            - StripPrefix=1
+        - id: login
+          uri: lb://rmx-student-manage
+          predicates:
+            - Path=/gateway/login/**
+          filters:
+            - StripPrefix=1
+
   datasource:
     jdbc-url : mysql://139.224.250.223:3306/hotel?useSSL=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     jdbcurl : mysql://139.224.250.223:3306/hotel?useSSL=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai

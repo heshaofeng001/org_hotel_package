@@ -5,13 +5,13 @@
 
 
 <generatorConfiguration>
-    <!--此处targetRuntime配置填写Ibatis2Java5则为生成ibatis代码 如果选Mybatis3则是生成mybatis代码  -->
+
     <context id="MySQLTables" targetRuntime="MyBatis3">
         <!--去除注释  -->
         <commentGenerator>
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
-        <!--数据库连接 此处是自动生成代码时候需要去找的库  把连接 账户 密码 配置成我们本地的数据库就可以了 -->
+
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                         connectionURL="jdbc:mysql://139.224.250.223:3306/hotel"
                         userId="root"
@@ -22,7 +22,6 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
-        <!--生成实体类 指定包名 以及生成的地址 （可以自定义地址，但是路径不存在不会自动创建  使用Maven生成在target目录下，会自动创建） -->
         <javaModelGenerator targetPackage="org.hotel.packages.dal.po"
                             targetProject="src/main/java">
             <property name="enableSubPackages" value="false"/>
@@ -32,28 +31,43 @@
         <sqlMapGenerator targetPackage="resources/mappers" targetProject="src/main">
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
-        <!--生成Dao文件 可以配置 type="XMLMAPPER"生成xml的dao实现  context id="DB2Tables" 修改targetRuntime="MyBatis3"  -->
         <javaClientGenerator type="XMLMAPPER" targetPackage="org.hotel.packages.dal"
                              targetProject="src/main/java" implementationPackage="org.hotel.packages.dal.impl">
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
-        <!--对应数据库表 mysql可以加入主键自增 字段命名 忽略某字段等-->
-        <!--<table tableName="distribution" enableSelectByExample="false" enableDeleteByExample="false"
-               enableCountByExample="false" enableUpdateByExample="false">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-            <columnOverride column="distribution_type" javaType="Integer"/>
-            <columnOverride column="biz_type" javaType="Integer"/>
-            <columnOverride column="state" javaType="Integer"/>
-        </table>-->
-        <!--table标签就是对应的表结构 通过配置这个选项生成对应的实体对象 xml文件等
-tableName即为表名 domainObjectName为对应的实体名称 还可以配其他比较复杂的各种东西-->
         <table tableName="hotel_package" enableSelectByExample="true" enableDeleteByExample="true"
                enableCountByExample="true" enableUpdateByExample="true" domainObjectName="PackageInfoBO">
             <generatedKey column="package_id" sqlStatement="MySql" identity="true"/>
-            <columnOverride column="package_id" javaType="Integer"/>
+            <columnOverride column="package_id" javaType="String"/>
             <columnOverride column="package_status" javaType="String"/>
             <columnOverride column="owner_id" javaType="String"/>
+        </table>
+
+        <table tableName="hotel_customer" enableSelectByExample="true" enableDeleteByExample="true"
+               enableCountByExample="true" enableUpdateByExample="true" domainObjectName="CustomerBO">
+            <generatedKey column="customer_id" sqlStatement="MySql" identity="true"/>
+            <columnOverride column="customer_id" javaType="String"/>
+            <columnOverride column="customer_name" javaType="String"/>
+            <columnOverride column="customer_status" javaType="String"/>
+            <columnOverride column="check_in_date" javaType="java.util.Date"/>
+            <columnOverride column="check_out_date" javaType="java.util.Date"/>
+        </table>
+
+        <table tableName="hotel_cabinet" enableSelectByExample="true" enableDeleteByExample="true"
+               enableCountByExample="true" enableUpdateByExample="true" domainObjectName="CabinetBO">
+            <generatedKey column="cabinet_id" sqlStatement="MySql" identity="true"/>
+            <columnOverride column="size" javaType="String"/>
+            <columnOverride column="cabinet_status" javaType="String"/>
+            <columnOverride column="number" javaType="String"/>
+        </table>
+
+        <table tableName="hotel_cabinet_package_relation" enableSelectByExample="true" enableDeleteByExample="true"
+               enableCountByExample="true" enableUpdateByExample="true" domainObjectName="CabinetPackageRelationBO">
+            <generatedKey column="cabinet_id" sqlStatement="MySql" identity="true"/>
+            <columnOverride column="cabinet_id" javaType="String"/>
+            <columnOverride column="package_id" javaType="String"/>
+            <columnOverride column="status" javaType="String"/>
         </table>
     </context>
 </generatorConfiguration>

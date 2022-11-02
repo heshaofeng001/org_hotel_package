@@ -10,7 +10,7 @@ public interface PackageInfoBOMapper {
 
     int deleteByExample(PackageInfoBOExample example);
 
-    int deleteByPrimaryKey(Integer packageId);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(PackageInfoBO record);
 
@@ -18,7 +18,7 @@ public interface PackageInfoBOMapper {
 
     List<PackageInfoBO> selectByExample(PackageInfoBOExample example);
 
-    PackageInfoBO selectByPrimaryKey(Integer packageId);
+    PackageInfoBO selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") PackageInfoBO record, @Param("example") PackageInfoBOExample example);
 
