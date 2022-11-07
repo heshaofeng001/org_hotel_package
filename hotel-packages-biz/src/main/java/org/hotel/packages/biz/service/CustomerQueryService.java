@@ -1,9 +1,9 @@
 package org.hotel.packages.biz.service;
 
 import org.hotel.packages.biz.convert.CustomerConvertor;
-import org.hotel.packages.core.cache.CacheService;
+import org.hotel.packages.core.redis.CacheService;
 import org.hotel.packages.facade.model.customer.CustomerDTO;
-import org.hotel.packages.model.enums.CacheObjectConfigEnum;
+import org.hotel.packages.core.redis.config.CacheObjectConfigEnum;
 import org.hotel.packages.model.models.CustomerModel;
 import org.hotel.packages.core.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;

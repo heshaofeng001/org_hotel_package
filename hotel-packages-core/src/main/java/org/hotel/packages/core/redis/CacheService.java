@@ -1,7 +1,7 @@
-package org.hotel.packages.core.cache;
+package org.hotel.packages.core.redis;
 
 import org.hotel.packages.facade.model.base.ToString;
-import org.hotel.packages.model.enums.CacheObjectConfigEnum;
+import org.hotel.packages.core.redis.config.CacheObjectConfigEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;

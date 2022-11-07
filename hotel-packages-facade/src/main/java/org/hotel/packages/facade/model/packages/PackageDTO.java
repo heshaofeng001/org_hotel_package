@@ -35,4 +35,10 @@ public class PackageDTO extends PackageBaseDTO {
 
 
     private Date checkOutDate;
+
+
+    /**
+     * 包裹存储柜子信息
+     */
+    private CabinetDTO cabinet;
 }

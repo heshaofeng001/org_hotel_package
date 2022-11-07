@@ -1,4 +1,4 @@
-package org.hotel.packages.core.cache;
+package org.hotel.packages.core.redis.config;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.parser.ParserConfig;

@@ -8,6 +8,9 @@ public class CabinetConvertor {
     public static CabinetDTO convertToDTO(CabinetModel cabinetModel) {
         CabinetDTO cabinetDTO = new CabinetDTO();
         cabinetDTO.setCabinetId(cabinetModel.getCabinetId());
+        cabinetDTO.setNumber(cabinetModel.getNumber());
+        cabinetDTO.setStatus(cabinetModel.getStatus().getCode());
+        cabinetDTO.setSize(cabinetModel.getSize());
         return cabinetDTO;
     }
 }

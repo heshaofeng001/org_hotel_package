@@ -1,4 +1,4 @@
-package org.hotel.packages.model.enums;
+package org.hotel.packages.core.redis.config;
 
 import lombok.Getter;
 

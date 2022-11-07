@@ -1,5 +1,6 @@
 package org.hotel.packages.core.repository.impl;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hotel.packages.core.repository.CabinetRepository;
 import org.hotel.packages.dal.CabinetBOMapper;
 import org.hotel.packages.dal.idgenerate.IdGenerate;
@@ -40,8 +41,15 @@ public class CabinetRepositoryImpl implements CabinetRepository {
 
         CabinetBOExample example = new CabinetBOExample();
         CabinetBOExample.Criteria criteria = example.createCriteria();
-        criteria.andSizeGreaterThan(condition.getMinSize());
-        criteria.andCabinetStatusEqualTo(condition.getStatus());
+        if (StringUtils.isNotBlank(condition.getMinSize())) {
+            criteria.andSizeGreaterThan(condition.getMinSize());
+        }
+        if (StringUtils.isNotBlank(condition.getStatus())) {
+            criteria.andCabinetStatusEqualTo(condition.getStatus());
+        }
+        if (!CollectionUtils.isEmpty(condition.getCabinetIds())) {
+            criteria.andCabinetIdIn(condition.getCabinetIds());
+        }
         List<CabinetBO> boList = cabinetBOMapper.selectByExample(example);
         if (CollectionUtils.isEmpty(boList)) {
             return null;
