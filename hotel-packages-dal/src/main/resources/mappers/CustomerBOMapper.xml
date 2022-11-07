@@ -6,6 +6,8 @@
     <result column="customer_id" jdbcType="VARCHAR" property="customerId" />
     <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
     <result column="customer_status" jdbcType="VARCHAR" property="customerStatus" />
+    <result column="id_card_no" jdbcType="VARCHAR" property="idCardNo" />
+    <result column="check_in_status" jdbcType="VARCHAR" property="checkInStatus" />
     <result column="check_in_date" jdbcType="DATE" property="checkInDate" />
     <result column="check_out_date" jdbcType="DATE" property="checkOutDate" />
   </resultMap>
@@ -68,7 +70,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, customer_id, customer_name, customer_status, check_in_date, check_out_date
+    id, customer_id, customer_name, customer_status, id_card_no, check_in_status, check_in_date, 
+    check_out_date
   </sql>
   <select id="selectByExample" parameterType="org.hotel.packages.dal.po.CustomerBOExample" resultMap="BaseResultMap">
     select
@@ -101,690 +104,36 @@
     </if>
   </delete>
   <insert id="insert" parameterType="org.hotel.packages.dal.po.CustomerBO">
-    <selectKey keyProperty="customerId" order="AFTER" resultType="String">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into hotel_customer (id, customer_name, customer_status, 
-      check_in_date, check_out_date)
-    values (#{id,jdbcType=INTEGER}, #{customerName,jdbcType=VARCHAR}, #{customerStatus,jdbcType=VARCHAR}, 
-      #{checkInDate,jdbcType=DATE}, #{checkOutDate,jdbcType=DATE})
-  </insert>
-  <insert id="insertSelective" parameterType="org.hotel.packages.dal.po.CustomerBO">
-    <selectKey keyProperty="customerId" order="AFTER" resultType="String">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into hotel_customer
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="customerName != null">
-        customer_name,
-      </if>
-      <if test="customerStatus != null">
-        customer_status,
-      </if>
-      <if test="checkInDate != null">
-        check_in_date,
-      </if>
-      <if test="checkOutDate != null">
-        check_out_date,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="customerName != null">
-        #{customerName,jdbcType=VARCHAR},
-      </if>
-      <if test="customerStatus != null">
-        #{customerStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="checkInDate != null">
-        #{checkInDate,jdbcType=DATE},
-      </if>
-      <if test="checkOutDate != null">
-        #{checkOutDate,jdbcType=DATE},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="org.hotel.packages.dal.po.CustomerBOExample" resultType="java.lang.Long">
-    select count(*) from hotel_customer
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update hotel_customer
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.customerId != null">
-        customer_id = #{record.customerId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.customerName != null">
-        customer_name = #{record.customerName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.customerStatus != null">
-        customer_status = #{record.customerStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="record.checkInDate != null">
-        check_in_date = #{record.checkInDate,jdbcType=DATE},
-      </if>
-      <if test="record.checkOutDate != null">
-        check_out_date = #{record.checkOutDate,jdbcType=DATE},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update hotel_customer
-    set id = #{record.id,jdbcType=INTEGER},
-      customer_id = #{record.customerId,jdbcType=VARCHAR},
-      customer_name = #{record.customerName,jdbcType=VARCHAR},
-      customer_status = #{record.customerStatus,jdbcType=VARCHAR},
-      check_in_date = #{record.checkInDate,jdbcType=DATE},
-      check_out_date = #{record.checkOutDate,jdbcType=DATE}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="org.hotel.packages.dal.po.CustomerBO">
-    update hotel_customer
-    <set>
-      <if test="customerId != null">
-        customer_id = #{customerId,jdbcType=VARCHAR},
-      </if>
-      <if test="customerName != null">
-        customer_name = #{customerName,jdbcType=VARCHAR},
-      </if>
-      <if test="customerStatus != null">
-        customer_status = #{customerStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="checkInDate != null">
-        check_in_date = #{checkInDate,jdbcType=DATE},
-      </if>
-      <if test="checkOutDate != null">
-        check_out_date = #{checkOutDate,jdbcType=DATE},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="org.hotel.packages.dal.po.CustomerBO">
-    update hotel_customer
-    set customer_id = #{customerId,jdbcType=VARCHAR},
-      customer_name = #{customerName,jdbcType=VARCHAR},
-      customer_status = #{customerStatus,jdbcType=VARCHAR},
-      check_in_date = #{checkInDate,jdbcType=DATE},
-      check_out_date = #{checkOutDate,jdbcType=DATE}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <resultMap id="BaseResultMap" type="org.hotel.packages.dal.po.CustomerBO">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="customer_id" jdbcType="VARCHAR" property="customerId" />
-    <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
-    <result column="customer_status" jdbcType="VARCHAR" property="customerStatus" />
-    <result column="check_in_date" jdbcType="DATE" property="checkInDate" />
-    <result column="check_out_date" jdbcType="DATE" property="checkOutDate" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    id, customer_id, customer_name, customer_status, check_in_date, check_out_date
-  </sql>
-  <select id="selectByExample" parameterType="org.hotel.packages.dal.po.CustomerBOExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from hotel_customer
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from hotel_customer
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from hotel_customer
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="org.hotel.packages.dal.po.CustomerBOExample">
-    delete from hotel_customer
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="org.hotel.packages.dal.po.CustomerBO">
-    <selectKey keyProperty="customerId" order="AFTER" resultType="String">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into hotel_customer (id, customer_name, customer_status, 
-      check_in_date, check_out_date)
-    values (#{id,jdbcType=INTEGER}, #{customerName,jdbcType=VARCHAR}, #{customerStatus,jdbcType=VARCHAR}, 
-      #{checkInDate,jdbcType=DATE}, #{checkOutDate,jdbcType=DATE})
-  </insert>
-  <insert id="insertSelective" parameterType="org.hotel.packages.dal.po.CustomerBO">
-    <selectKey keyProperty="customerId" order="AFTER" resultType="String">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into hotel_customer
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="customerName != null">
-        customer_name,
-      </if>
-      <if test="customerStatus != null">
-        customer_status,
-      </if>
-      <if test="checkInDate != null">
-        check_in_date,
-      </if>
-      <if test="checkOutDate != null">
-        check_out_date,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="customerName != null">
-        #{customerName,jdbcType=VARCHAR},
-      </if>
-      <if test="customerStatus != null">
-        #{customerStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="checkInDate != null">
-        #{checkInDate,jdbcType=DATE},
-      </if>
-      <if test="checkOutDate != null">
-        #{checkOutDate,jdbcType=DATE},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="org.hotel.packages.dal.po.CustomerBOExample" resultType="java.lang.Long">
-    select count(*) from hotel_customer
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update hotel_customer
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.customerId != null">
-        customer_id = #{record.customerId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.customerName != null">
-        customer_name = #{record.customerName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.customerStatus != null">
-        customer_status = #{record.customerStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="record.checkInDate != null">
-        check_in_date = #{record.checkInDate,jdbcType=DATE},
-      </if>
-      <if test="record.checkOutDate != null">
-        check_out_date = #{record.checkOutDate,jdbcType=DATE},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update hotel_customer
-    set id = #{record.id,jdbcType=INTEGER},
-      customer_id = #{record.customerId,jdbcType=VARCHAR},
-      customer_name = #{record.customerName,jdbcType=VARCHAR},
-      customer_status = #{record.customerStatus,jdbcType=VARCHAR},
-      check_in_date = #{record.checkInDate,jdbcType=DATE},
-      check_out_date = #{record.checkOutDate,jdbcType=DATE}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="org.hotel.packages.dal.po.CustomerBO">
-    update hotel_customer
-    <set>
-      <if test="customerId != null">
-        customer_id = #{customerId,jdbcType=VARCHAR},
-      </if>
-      <if test="customerName != null">
-        customer_name = #{customerName,jdbcType=VARCHAR},
-      </if>
-      <if test="customerStatus != null">
-        customer_status = #{customerStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="checkInDate != null">
-        check_in_date = #{checkInDate,jdbcType=DATE},
-      </if>
-      <if test="checkOutDate != null">
-        check_out_date = #{checkOutDate,jdbcType=DATE},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="org.hotel.packages.dal.po.CustomerBO">
-    update hotel_customer
-    set customer_id = #{customerId,jdbcType=VARCHAR},
-      customer_name = #{customerName,jdbcType=VARCHAR},
-      customer_status = #{customerStatus,jdbcType=VARCHAR},
-      check_in_date = #{checkInDate,jdbcType=DATE},
-      check_out_date = #{checkOutDate,jdbcType=DATE}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <resultMap id="BaseResultMap" type="org.hotel.packages.dal.po.CustomerBO">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="customer_id" jdbcType="VARCHAR" property="customerId" />
-    <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
-    <result column="customer_status" jdbcType="VARCHAR" property="customerStatus" />
-    <result column="check_in_date" jdbcType="DATE" property="checkInDate" />
-    <result column="check_out_date" jdbcType="DATE" property="checkOutDate" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    id, customer_id, customer_name, customer_status, check_in_date, check_out_date
-  </sql>
-  <select id="selectByExample" parameterType="org.hotel.packages.dal.po.CustomerBOExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from hotel_customer
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from hotel_customer
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from hotel_customer
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="org.hotel.packages.dal.po.CustomerBOExample">
-    delete from hotel_customer
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="org.hotel.packages.dal.po.CustomerBO">
-    <selectKey keyProperty="customerId" order="AFTER" resultType="Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into hotel_customer (id, customer_name, customer_status, 
-      check_in_date, check_out_date)
-    values (#{id,jdbcType=INTEGER}, #{customerName,jdbcType=VARCHAR}, #{customerStatus,jdbcType=VARCHAR}, 
-      #{checkInDate,jdbcType=DATE}, #{checkOutDate,jdbcType=DATE})
-  </insert>
-  <insert id="insertSelective" parameterType="org.hotel.packages.dal.po.CustomerBO">
-    <selectKey keyProperty="customerId" order="AFTER" resultType="Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into hotel_customer
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="customerName != null">
-        customer_name,
-      </if>
-      <if test="customerStatus != null">
-        customer_status,
-      </if>
-      <if test="checkInDate != null">
-        check_in_date,
-      </if>
-      <if test="checkOutDate != null">
-        check_out_date,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="customerName != null">
-        #{customerName,jdbcType=VARCHAR},
-      </if>
-      <if test="customerStatus != null">
-        #{customerStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="checkInDate != null">
-        #{checkInDate,jdbcType=DATE},
-      </if>
-      <if test="checkOutDate != null">
-        #{checkOutDate,jdbcType=DATE},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="org.hotel.packages.dal.po.CustomerBOExample" resultType="java.lang.Long">
-    select count(*) from hotel_customer
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update hotel_customer
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.customerId != null">
-        customer_id = #{record.customerId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.customerName != null">
-        customer_name = #{record.customerName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.customerStatus != null">
-        customer_status = #{record.customerStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="record.checkInDate != null">
-        check_in_date = #{record.checkInDate,jdbcType=DATE},
-      </if>
-      <if test="record.checkOutDate != null">
-        check_out_date = #{record.checkOutDate,jdbcType=DATE},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update hotel_customer
-    set id = #{record.id,jdbcType=INTEGER},
-      customer_id = #{record.customerId,jdbcType=VARCHAR},
-      customer_name = #{record.customerName,jdbcType=VARCHAR},
-      customer_status = #{record.customerStatus,jdbcType=VARCHAR},
-      check_in_date = #{record.checkInDate,jdbcType=DATE},
-      check_out_date = #{record.checkOutDate,jdbcType=DATE}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="org.hotel.packages.dal.po.CustomerBO">
-    update hotel_customer
-    <set>
-      <if test="customerId != null">
-        customer_id = #{customerId,jdbcType=VARCHAR},
-      </if>
-      <if test="customerName != null">
-        customer_name = #{customerName,jdbcType=VARCHAR},
-      </if>
-      <if test="customerStatus != null">
-        customer_status = #{customerStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="checkInDate != null">
-        check_in_date = #{checkInDate,jdbcType=DATE},
-      </if>
-      <if test="checkOutDate != null">
-        check_out_date = #{checkOutDate,jdbcType=DATE},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="org.hotel.packages.dal.po.CustomerBO">
-    update hotel_customer
-    set customer_id = #{customerId,jdbcType=VARCHAR},
-      customer_name = #{customerName,jdbcType=VARCHAR},
-      customer_status = #{customerStatus,jdbcType=VARCHAR},
-      check_in_date = #{checkInDate,jdbcType=DATE},
-      check_out_date = #{checkOutDate,jdbcType=DATE}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <resultMap id="BaseResultMap" type="org.hotel.packages.dal.po.CustomerBO">
-    <id column="customer_id" jdbcType="INTEGER" property="customerId" />
-    <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
-    <result column="customer_status" jdbcType="VARCHAR" property="customerStatus" />
-    <result column="check_in_date" jdbcType="DATE" property="checkInDate" />
-    <result column="check_out_date" jdbcType="DATE" property="checkOutDate" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    customer_id, customer_name, customer_status, check_in_date, check_out_date
-  </sql>
-  <select id="selectByExample" parameterType="org.hotel.packages.dal.po.CustomerBOExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from hotel_customer
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from hotel_customer
-    where customer_id = #{customerId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="Integer">
-    delete from hotel_customer
-    where customer_id = #{customerId,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="org.hotel.packages.dal.po.CustomerBOExample">
-    delete from hotel_customer
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="org.hotel.packages.dal.po.CustomerBO">
-    <selectKey keyProperty="customerId" order="AFTER" resultType="Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into hotel_customer (customer_name, customer_status, check_in_date, 
+    insert into hotel_customer (customer_id, customer_name, customer_status, 
+      id_card_no, check_in_status, check_in_date, 
       check_out_date)
-    values (#{customerName,jdbcType=VARCHAR}, #{customerStatus,jdbcType=VARCHAR}, #{checkInDate,jdbcType=DATE}, 
+    values (#{customerId,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, #{customerStatus,jdbcType=VARCHAR}, 
+      #{idCardNo,jdbcType=VARCHAR}, #{checkInStatus,jdbcType=VARCHAR}, #{checkInDate,jdbcType=DATE}, 
       #{checkOutDate,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="org.hotel.packages.dal.po.CustomerBO">
-    <selectKey keyProperty="customerId" order="AFTER" resultType="Integer">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into hotel_customer
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="customerId != null">
+        customer_id,
+      </if>
       <if test="customerName != null">
         customer_name,
       </if>
       <if test="customerStatus != null">
         customer_status,
+      </if>
+      <if test="idCardNo != null">
+        id_card_no,
+      </if>
+      <if test="checkInStatus != null">
+        check_in_status,
       </if>
       <if test="checkInDate != null">
         check_in_date,
@@ -794,11 +143,20 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="customerId != null">
+        #{customerId,jdbcType=VARCHAR},
+      </if>
       <if test="customerName != null">
         #{customerName,jdbcType=VARCHAR},
       </if>
       <if test="customerStatus != null">
         #{customerStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardNo != null">
+        #{idCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="checkInStatus != null">
+        #{checkInStatus,jdbcType=VARCHAR},
       </if>
       <if test="checkInDate != null">
         #{checkInDate,jdbcType=DATE},
@@ -817,14 +175,23 @@
   <update id="updateByExampleSelective" parameterType="map">
     update hotel_customer
     <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
       <if test="record.customerId != null">
-        customer_id = #{record.customerId,jdbcType=INTEGER},
+        customer_id = #{record.customerId,jdbcType=VARCHAR},
       </if>
       <if test="record.customerName != null">
         customer_name = #{record.customerName,jdbcType=VARCHAR},
       </if>
       <if test="record.customerStatus != null">
         customer_status = #{record.customerStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCardNo != null">
+        id_card_no = #{record.idCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkInStatus != null">
+        check_in_status = #{record.checkInStatus,jdbcType=VARCHAR},
       </if>
       <if test="record.checkInDate != null">
         check_in_date = #{record.checkInDate,jdbcType=DATE},
@@ -839,9 +206,12 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update hotel_customer
-    set customer_id = #{record.customerId,jdbcType=INTEGER},
+    set id = #{record.id,jdbcType=INTEGER},
+      customer_id = #{record.customerId,jdbcType=VARCHAR},
       customer_name = #{record.customerName,jdbcType=VARCHAR},
       customer_status = #{record.customerStatus,jdbcType=VARCHAR},
+      id_card_no = #{record.idCardNo,jdbcType=VARCHAR},
+      check_in_status = #{record.checkInStatus,jdbcType=VARCHAR},
       check_in_date = #{record.checkInDate,jdbcType=DATE},
       check_out_date = #{record.checkOutDate,jdbcType=DATE}
     <if test="_parameter != null">
@@ -851,11 +221,20 @@
   <update id="updateByPrimaryKeySelective" parameterType="org.hotel.packages.dal.po.CustomerBO">
     update hotel_customer
     <set>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=VARCHAR},
+      </if>
       <if test="customerName != null">
         customer_name = #{customerName,jdbcType=VARCHAR},
       </if>
       <if test="customerStatus != null">
         customer_status = #{customerStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardNo != null">
+        id_card_no = #{idCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="checkInStatus != null">
+        check_in_status = #{checkInStatus,jdbcType=VARCHAR},
       </if>
       <if test="checkInDate != null">
         check_in_date = #{checkInDate,jdbcType=DATE},
@@ -864,14 +243,17 @@
         check_out_date = #{checkOutDate,jdbcType=DATE},
       </if>
     </set>
-    where customer_id = #{customerId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.hotel.packages.dal.po.CustomerBO">
     update hotel_customer
-    set customer_name = #{customerName,jdbcType=VARCHAR},
+    set customer_id = #{customerId,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
       customer_status = #{customerStatus,jdbcType=VARCHAR},
+      id_card_no = #{idCardNo,jdbcType=VARCHAR},
+      check_in_status = #{checkInStatus,jdbcType=VARCHAR},
       check_in_date = #{checkInDate,jdbcType=DATE},
       check_out_date = #{checkOutDate,jdbcType=DATE}
-    where customer_id = #{customerId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

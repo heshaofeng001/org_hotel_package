@@ -24,7 +24,7 @@ public class CabinetBO {
     }
 
     public void setCabinetId(String cabinetId) {
-        this.cabinetId = cabinetId == null ? null : cabinetId.trim();
+        this.cabinetId = cabinetId;
     }
 
     public String getSize() {

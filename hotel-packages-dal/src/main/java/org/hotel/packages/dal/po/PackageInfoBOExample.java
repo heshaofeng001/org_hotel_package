@@ -472,6 +472,76 @@ public class PackageInfoBOExample {
             return (Criteria) this;
         }
 
+        public Criteria andWayBillIdIsNull() {
+            addCriterion("way_bill_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWayBillIdIsNotNull() {
+            addCriterion("way_bill_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWayBillIdEqualTo(String value) {
+            addCriterion("way_bill_id =", value, "wayBillId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWayBillIdNotEqualTo(String value) {
+            addCriterion("way_bill_id <>", value, "wayBillId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWayBillIdGreaterThan(String value) {
+            addCriterion("way_bill_id >", value, "wayBillId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWayBillIdGreaterThanOrEqualTo(String value) {
+            addCriterion("way_bill_id >=", value, "wayBillId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWayBillIdLessThan(String value) {
+            addCriterion("way_bill_id <", value, "wayBillId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWayBillIdLessThanOrEqualTo(String value) {
+            addCriterion("way_bill_id <=", value, "wayBillId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWayBillIdLike(String value) {
+            addCriterion("way_bill_id like", value, "wayBillId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWayBillIdNotLike(String value) {
+            addCriterion("way_bill_id not like", value, "wayBillId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWayBillIdIn(List<String> values) {
+            addCriterion("way_bill_id in", values, "wayBillId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWayBillIdNotIn(List<String> values) {
+            addCriterion("way_bill_id not in", values, "wayBillId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWayBillIdBetween(String value1, String value2) {
+            addCriterion("way_bill_id between", value1, value2, "wayBillId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWayBillIdNotBetween(String value1, String value2) {
+            addCriterion("way_bill_id not between", value1, value2, "wayBillId");
+            return (Criteria) this;
+        }
+
         public Criteria andReceiveIdIsNull() {
             addCriterion("receive_id is null");
             return (Criteria) this;

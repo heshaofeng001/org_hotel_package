@@ -100,22 +100,22 @@
     </if>
   </delete>
   <insert id="insert" parameterType="org.hotel.packages.dal.po.CabinetBO">
-    <selectKey keyProperty="cabinetId" order="AFTER" resultType="java.lang.String">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into hotel_cabinet (id, size, cabinet_status, 
+    insert into hotel_cabinet (cabinet_id, size, cabinet_status, 
       number)
-    values (#{id,jdbcType=INTEGER}, #{size,jdbcType=VARCHAR}, #{cabinetStatus,jdbcType=VARCHAR}, 
+    values (#{cabinetId,jdbcType=VARCHAR}, #{size,jdbcType=VARCHAR}, #{cabinetStatus,jdbcType=VARCHAR}, 
       #{number,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.hotel.packages.dal.po.CabinetBO">
-    <selectKey keyProperty="cabinetId" order="AFTER" resultType="java.lang.String">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into hotel_cabinet
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
+      <if test="cabinetId != null">
+        cabinet_id,
       </if>
       <if test="size != null">
         size,
@@ -128,8 +128,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
+      <if test="cabinetId != null">
+        #{cabinetId,jdbcType=VARCHAR},
       </if>
       <if test="size != null">
         #{size,jdbcType=VARCHAR},

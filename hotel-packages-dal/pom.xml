@@ -5,7 +5,7 @@
 
     <parent>
         <groupId>org.hotel</groupId>
-        <artifactId>org-hotel-package</artifactId>
+        <artifactId>org_hotel_packages</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
@@ -16,19 +16,15 @@
 
     <dependencies>
 
-
-
-        <dependency><!--boot整合mybatis所需要的包-->
+        <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
         </dependency>
-
-
-        <dependency><!--mysql使用的包，这里记住要和自己的数据库一致-->
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-        <dependency><!--阿里巴巴的数据库连接池-->
+        <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
         </dependency>

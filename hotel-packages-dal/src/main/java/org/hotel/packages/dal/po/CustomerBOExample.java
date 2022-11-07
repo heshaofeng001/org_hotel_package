@@ -402,6 +402,146 @@ public class CustomerBOExample {
             return (Criteria) this;
         }
 
+        public Criteria andIdCardNoIsNull() {
+            addCriterion("id_card_no is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdCardNoIsNotNull() {
+            addCriterion("id_card_no is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdCardNoEqualTo(String value) {
+            addCriterion("id_card_no =", value, "idCardNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdCardNoNotEqualTo(String value) {
+            addCriterion("id_card_no <>", value, "idCardNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdCardNoGreaterThan(String value) {
+            addCriterion("id_card_no >", value, "idCardNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdCardNoGreaterThanOrEqualTo(String value) {
+            addCriterion("id_card_no >=", value, "idCardNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdCardNoLessThan(String value) {
+            addCriterion("id_card_no <", value, "idCardNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdCardNoLessThanOrEqualTo(String value) {
+            addCriterion("id_card_no <=", value, "idCardNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdCardNoLike(String value) {
+            addCriterion("id_card_no like", value, "idCardNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdCardNoNotLike(String value) {
+            addCriterion("id_card_no not like", value, "idCardNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdCardNoIn(List<String> values) {
+            addCriterion("id_card_no in", values, "idCardNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdCardNoNotIn(List<String> values) {
+            addCriterion("id_card_no not in", values, "idCardNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdCardNoBetween(String value1, String value2) {
+            addCriterion("id_card_no between", value1, value2, "idCardNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdCardNoNotBetween(String value1, String value2) {
+            addCriterion("id_card_no not between", value1, value2, "idCardNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckInStatusIsNull() {
+            addCriterion("check_in_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckInStatusIsNotNull() {
+            addCriterion("check_in_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckInStatusEqualTo(String value) {
+            addCriterion("check_in_status =", value, "checkInStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckInStatusNotEqualTo(String value) {
+            addCriterion("check_in_status <>", value, "checkInStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckInStatusGreaterThan(String value) {
+            addCriterion("check_in_status >", value, "checkInStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckInStatusGreaterThanOrEqualTo(String value) {
+            addCriterion("check_in_status >=", value, "checkInStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckInStatusLessThan(String value) {
+            addCriterion("check_in_status <", value, "checkInStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckInStatusLessThanOrEqualTo(String value) {
+            addCriterion("check_in_status <=", value, "checkInStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckInStatusLike(String value) {
+            addCriterion("check_in_status like", value, "checkInStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckInStatusNotLike(String value) {
+            addCriterion("check_in_status not like", value, "checkInStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckInStatusIn(List<String> values) {
+            addCriterion("check_in_status in", values, "checkInStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckInStatusNotIn(List<String> values) {
+            addCriterion("check_in_status not in", values, "checkInStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckInStatusBetween(String value1, String value2) {
+            addCriterion("check_in_status between", value1, value2, "checkInStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckInStatusNotBetween(String value1, String value2) {
+            addCriterion("check_in_status not between", value1, value2, "checkInStatus");
+            return (Criteria) this;
+        }
+
         public Criteria andCheckInDateIsNull() {
             addCriterion("check_in_date is null");
             return (Criteria) this;

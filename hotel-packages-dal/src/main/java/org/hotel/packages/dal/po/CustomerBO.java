@@ -11,6 +11,10 @@ public class CustomerBO {
 
     private String customerStatus;
 
+    private String idCardNo;
+
+    private String checkInStatus;
+
     private Date checkInDate;
 
     private Date checkOutDate;
@@ -45,6 +49,22 @@ public class CustomerBO {
 
     public void setCustomerStatus(String customerStatus) {
         this.customerStatus = customerStatus;
+    }
+
+    public String getIdCardNo() {
+        return idCardNo;
+    }
+
+    public void setIdCardNo(String idCardNo) {
+        this.idCardNo = idCardNo == null ? null : idCardNo.trim();
+    }
+
+    public String getCheckInStatus() {
+        return checkInStatus;
+    }
+
+    public void setCheckInStatus(String checkInStatus) {
+        this.checkInStatus = checkInStatus == null ? null : checkInStatus.trim();
     }
 
     public Date getCheckInDate() {

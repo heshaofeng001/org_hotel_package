@@ -11,7 +11,7 @@ import org.springframework.session.data.redis.config.annotation.web.server.Enabl
         "classpath*:META-INF/spring/spring-aop.xml"
 })
 @SpringBootApplication(scanBasePackages = {"org.hotel.packages"})
-@MapperScan(basePackages={"org.hotel.packages"})
+@MapperScan(basePackages={"org.hotel.packages.dal"})
 @EnableDubbo(scanBasePackages = {"org.hotel.packages"})
 @EnableRedisWebSession
 public class ApplicationStart {

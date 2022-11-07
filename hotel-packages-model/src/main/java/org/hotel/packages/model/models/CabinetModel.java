@@ -1,8 +1,8 @@
 package org.hotel.packages.model.models;
 
 import lombok.Data;
-import org.hotel.packages.facade.model.ToString;
-import org.hotel.packages.model.enums.CabinetStatusEnum;
+import org.hotel.packages.facade.model.base.ToString;
+import org.hotel.packages.facade.model.status.CabinetStatusEnum;
 
 @Data
 public class CabinetModel extends ToString {

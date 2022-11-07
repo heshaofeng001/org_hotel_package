@@ -13,6 +13,8 @@ public class PackageInfoBO {
 
     private String ownerType;
 
+    private String wayBillId;
+
     private String receiveId;
 
     private String receiveType;
@@ -59,6 +61,14 @@ public class PackageInfoBO {
 
     public void setOwnerType(String ownerType) {
         this.ownerType = ownerType == null ? null : ownerType.trim();
+    }
+
+    public String getWayBillId() {
+        return wayBillId;
+    }
+
+    public void setWayBillId(String wayBillId) {
+        this.wayBillId = wayBillId == null ? null : wayBillId.trim();
     }
 
     public String getReceiveId() {

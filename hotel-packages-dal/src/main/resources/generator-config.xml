@@ -38,7 +38,7 @@
 
         <table tableName="hotel_package" enableSelectByExample="true" enableDeleteByExample="true"
                enableCountByExample="true" enableUpdateByExample="true" domainObjectName="PackageInfoBO">
-            <generatedKey column="package_id" sqlStatement="MySql" identity="true"/>
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
             <columnOverride column="package_id" javaType="String"/>
             <columnOverride column="package_status" javaType="String"/>
             <columnOverride column="owner_id" javaType="String"/>
@@ -46,7 +46,7 @@
 
         <table tableName="hotel_customer" enableSelectByExample="true" enableDeleteByExample="true"
                enableCountByExample="true" enableUpdateByExample="true" domainObjectName="CustomerBO">
-            <generatedKey column="customer_id" sqlStatement="MySql" identity="true"/>
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
             <columnOverride column="customer_id" javaType="String"/>
             <columnOverride column="customer_name" javaType="String"/>
             <columnOverride column="customer_status" javaType="String"/>
@@ -56,7 +56,8 @@
 
         <table tableName="hotel_cabinet" enableSelectByExample="true" enableDeleteByExample="true"
                enableCountByExample="true" enableUpdateByExample="true" domainObjectName="CabinetBO">
-            <generatedKey column="cabinet_id" sqlStatement="MySql" identity="true"/>
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+            <columnOverride column="cabinet_id" javaType="String"/>
             <columnOverride column="size" javaType="String"/>
             <columnOverride column="cabinet_status" javaType="String"/>
             <columnOverride column="number" javaType="String"/>
@@ -64,10 +65,19 @@
 
         <table tableName="hotel_cabinet_package_relation" enableSelectByExample="true" enableDeleteByExample="true"
                enableCountByExample="true" enableUpdateByExample="true" domainObjectName="CabinetPackageRelationBO">
-            <generatedKey column="cabinet_id" sqlStatement="MySql" identity="true"/>
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
             <columnOverride column="cabinet_id" javaType="String"/>
             <columnOverride column="package_id" javaType="String"/>
             <columnOverride column="status" javaType="String"/>
+        </table>
+
+        <table tableName="hotel_work_order" enableSelectByExample="true" enableDeleteByExample="true"
+               enableCountByExample="true" enableUpdateByExample="true" domainObjectName="WorkOderBO">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+            <columnOverride column="order_id" javaType="String"/>
+            <columnOverride column="request_id" javaType="String"/>
+            <columnOverride column="status" javaType="String"/>
+            <columnOverride column="ext_info" javaType="String"/>
         </table>
     </context>
 </generatorConfiguration>

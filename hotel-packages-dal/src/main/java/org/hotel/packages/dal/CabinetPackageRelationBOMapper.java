@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.hotel.packages.dal.po.CabinetPackageRelationBO;
 import org.hotel.packages.dal.po.CabinetPackageRelationBOExample;
-
 @Mapper
 public interface CabinetPackageRelationBOMapper {
     long countByExample(CabinetPackageRelationBOExample example);

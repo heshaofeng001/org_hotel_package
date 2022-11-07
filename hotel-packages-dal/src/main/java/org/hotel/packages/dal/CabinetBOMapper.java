@@ -1,10 +1,12 @@
 package org.hotel.packages.dal;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.hotel.packages.dal.po.CabinetBO;
 import org.hotel.packages.dal.po.CabinetBOExample;
-
+@Mapper
 public interface CabinetBOMapper {
     long countByExample(CabinetBOExample example);
 

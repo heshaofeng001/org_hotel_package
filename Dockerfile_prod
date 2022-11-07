@@ -1,0 +1,22 @@
+FROM maven:3.5.0-jdk-8-alpine AS builder
+ADD pom.xml pom.xml
+ADD settings.xml settings.xml
+
+ADD ./hotel-packages-biz hotel-packages-biz/
+ADD ./hotel-packages-core hotel-packages-core/
+ADD ./hotel-packages-dal hotel-packages-dal/
+ADD ./hotel-packages-facade hotel-packages-facade/
+ADD ./hotel-packages-model hotel-packages-model/
+ADD ./hotel-packages-start hotel-packages-start/
+ADD ./hotel-packages-web hotel-packages-web/
+
+RUN mvn package -s settings.xml -Pprod -DskipTests -e
+
+
+
+# Second stage: minimal runtime environment
+From openjdk:8-jre-alpine
+# copy jar from the first stage
+COPY --from=builder hotel-packages-start/target/org-hotel-packages.jar org-hotel-packages.jar
+# run jar
+CMD ["java", "-jar", "org-hotel-packages.jar"]

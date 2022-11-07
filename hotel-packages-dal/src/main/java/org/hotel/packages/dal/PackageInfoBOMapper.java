@@ -1,10 +1,12 @@
 package org.hotel.packages.dal;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.hotel.packages.dal.po.PackageInfoBO;
 import org.hotel.packages.dal.po.PackageInfoBOExample;
-
+@Mapper
 public interface PackageInfoBOMapper {
     long countByExample(PackageInfoBOExample example);
 

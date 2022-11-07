@@ -1,10 +1,20 @@
 package org.hotel.packages.facade.api;
 
-import org.hotel.packages.facade.model.CabinetDTO;
+import org.hotel.packages.facade.model.packages.CabinetDTO;
+import org.hotel.packages.facade.request.CheckInConsultRequest;
 import org.hotel.packages.facade.request.PackageCheckInRequest;
 import org.hotel.packages.facade.result.Result;
 
+/**
+ * @author he_sh
+ * @version 2022-11月-05
+ **/
 public interface PackageManageFacade {
+
+    /**
+     * @return
+     */
+    Result<String> checkInConsult(CheckInConsultRequest request);
 
     /**
      * 包裹寄存受理服务
@@ -26,4 +36,6 @@ public interface PackageManageFacade {
      * @return
      */
     Result<CabinetDTO> checkIn(PackageCheckInRequest request);
+
+
 }

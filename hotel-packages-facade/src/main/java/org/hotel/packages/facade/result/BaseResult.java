@@ -1,12 +1,13 @@
 package org.hotel.packages.facade.result;
 
 import lombok.Data;
+import org.hotel.packages.facade.model.base.ToString;
 
 @Data
-public abstract class BaseResult {
+public abstract class BaseResult extends ToString {
 
 
-    private boolean result;
+    private boolean success;
 
     private String errorCode;
 

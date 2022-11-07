@@ -3,9 +3,18 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/hotel-packages-biz-impl/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/hotel-packages-biz/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hotel-packages-biz/src/main/java/org/hotel/packages/biz/service/CabinetAllocateService.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/hotel-packages-core/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/hotel-packages-dal/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hotel-packages-facade/src/main/java/org/hotel/packages/facade/model/packages/PackageBaseDTO.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/hotel-packages-facade/src/main/java/org/hotel/packages/facade/model/packages/PackageDTO.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/hotel-packages-model/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hotel-packages-model/src/main/java/org/hotel/packages/model/exception/ErrorCode.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hotel-packages-model/src/main/java/org/hotel/packages/model/models/CabinetModel.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hotel-packages-model/src/main/java/org/hotel/packages/model/models/CabinetPackageRelationModel.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hotel-packages-model/src/main/java/org/hotel/packages/model/models/CustomerModel.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hotel-packages-model/src/main/java/org/hotel/packages/model/models/PackageModel.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hotel-packages-model/src/main/java/org/hotel/packages/model/models/WorkOrderModel.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/hotel-packages-start/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/hotel-packages-web/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
