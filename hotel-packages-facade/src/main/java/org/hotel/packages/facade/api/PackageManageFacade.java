@@ -1,8 +1,11 @@
 package org.hotel.packages.facade.api;
 
 import org.hotel.packages.facade.model.packages.CabinetDTO;
+import org.hotel.packages.facade.model.packages.PackageDTO;
+import org.hotel.packages.facade.request.BatchQueryPackagesRequest;
 import org.hotel.packages.facade.request.CheckInConsultRequest;
 import org.hotel.packages.facade.request.PackageCheckInRequest;
+import org.hotel.packages.facade.result.BatchQueryResult;
 import org.hotel.packages.facade.result.Result;
 
 /**
@@ -37,5 +40,11 @@ public interface PackageManageFacade {
      */
     Result<CabinetDTO> checkIn(PackageCheckInRequest request);
 
-
+    /**
+     * 客户包裹查询接口
+     *
+     * @param request
+     * @return
+     */
+    BatchQueryResult<PackageDTO> batchQueryPackages(BatchQueryPackagesRequest request);
 }

@@ -22,4 +22,9 @@ public class PackageQueryCondition {
      * 运单号
      */
     private List<String> waybillIds;
+
+    /**
+     * 包裹状态
+     */
+    private String packageStatus;
 }

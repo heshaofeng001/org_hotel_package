@@ -8,6 +8,7 @@ import org.hotel.packages.facade.model.OperateContext;
 import org.hotel.packages.facade.model.customer.CustomerDTO;
 import org.hotel.packages.facade.model.packages.CabinetDTO;
 import org.hotel.packages.facade.model.packages.PackageDTO;
+import org.hotel.packages.facade.request.BatchQueryPackagesRequest;
 import org.hotel.packages.facade.request.CheckInConsultRequest;
 import org.hotel.packages.facade.request.CustomerQueryRequest;
 import org.hotel.packages.facade.request.PackageCheckInRequest;
@@ -79,6 +80,26 @@ public class PackageManageTest extends BaseTest {
             assertNotNull(checkInResult.getData());
         }
         checkBaseResult(checkInResult, result, errorCode);
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/packagesquery.csv")
+    public void testPackagesQuery(String icCardNo, String customerName,  String result, String errorCode) {
+
+        OperateContext operateContext = createOperateContext(icCardNo, customerName);
+        CustomerDTO customerDTO = queryCustomer(icCardNo, customerName, operateContext);
+
+        BatchQueryPackagesRequest batchQueryPackagesRequest = new BatchQueryPackagesRequest();
+        batchQueryPackagesRequest.setRequestId(UUID.randomUUID().toString());
+        batchQueryPackagesRequest.setCustomerId(customerDTO.getCustomerId());
+        batchQueryPackagesRequest.setOperateContext(operateContext);
+        BatchQueryResult<PackageDTO> packageDTOBatchQueryResult = packageManageFacade.batchQueryPackages(batchQueryPackagesRequest);
+        log.info(packageDTOBatchQueryResult.toString());
+
+        if (Boolean.parseBoolean(result)) {
+            assertNotNull(packageDTOBatchQueryResult.getData());
+        }
+        checkBaseResult(packageDTOBatchQueryResult, result, errorCode);
     }
 
 

@@ -30,9 +30,9 @@ public class WorkOrderRepositoryImpl implements WorkOrderRepository {
 
     @Override
     public int save(WorkOrderModel workOrderModel) {
-
+        //初始化ID
+        workOrderModel.setOrderId(idGenerate.generateId(TableEnums.HOTEL_WORK_ORDER));
         WorkOderBO workOderBO = convertToBO(workOrderModel);
-        workOderBO.setOrderId(idGenerate.generateId(TableEnums.HOTEL_WORK_ORDER));
         return workOderBOMapper.insert(workOderBO);
     }
 

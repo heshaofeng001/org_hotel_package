@@ -45,6 +45,12 @@ public class PackageInfoRepositoryImpl implements PackageInfoRepository {
         if (condition.getOwnerType() != null) {
             criteria.andOwnerTypeEqualTo(condition.getOwnerType().getCode());
         }
+        if (!CollectionUtils.isEmpty(condition.getWaybillIds())) {
+            criteria.andWayBillIdIn(condition.getWaybillIds());
+        }
+        if (StringUtils.isNotBlank(condition.getPackageStatus())) {
+            criteria.andPackageStatusEqualTo(condition.getPackageStatus());
+        }
         List<PackageInfoBO> packageInfoBOS = packageInfoBOMapper.selectByExample(packageInfoBOExample);
         if (CollectionUtils.isEmpty(packageInfoBOS)) {
             return null;

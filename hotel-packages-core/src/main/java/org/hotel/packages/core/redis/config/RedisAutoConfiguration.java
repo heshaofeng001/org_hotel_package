@@ -1,9 +1,8 @@
-package org.hotel.packages.core.cache;
+package org.hotel.packages.core.redis.config;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
-import org.springframework.boot.context.properties.ConfigurationBeanFactoryMetadata;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,13 +17,11 @@ import java.net.UnknownHostException;
 @EnableConfigurationProperties(RedisProperties.class)
 public class RedisAutoConfiguration {
 
-    private ConfigurationBeanFactoryMetadata configurationBeanFactoryMetadata;
-
     @Bean
     @ConditionalOnMissingBean(name = "redisTemplate")
-    public RedisTemplate<Object, Object> redisTemplate(
+    public RedisTemplate<String, ?> redisTemplate(
             RedisConnectionFactory redisConnectionFactory) throws UnknownHostException {
-        RedisTemplate<Object, Object> template = new RedisTemplate<>();
+        RedisTemplate<String, ?> template = new RedisTemplate<>();
         template.setConnectionFactory(redisConnectionFactory);
         template.setValueSerializer(new JSONRedisSerializer());
         return template;
