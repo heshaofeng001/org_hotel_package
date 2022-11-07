@@ -1,17 +1,18 @@
 一、业务说明
 1、CustomerManageFacade
     create：客户注册服务
+    batchQueryByCondition：用户批量查询接口
+        逻辑：根据手机号、身份证等信息，查询用户信息
 2、PackageManageFacade
     checkInConsult：包裹寄存校验接口；
         逻辑：1、用户状态校验，用户是否入住校验，
              2、判断是否存在容积大于所有包裹容积总和的，空着的柜子
-    batchQueryByCondition：用户批量查询接口
-        逻辑：根据手机号、身份证等信息，查询用户信息
-
     checkIn： 包裹寄存接口；
         逻辑：1、校验
              2、登记包裹信息
              3、分配柜子，并保存柜子使用信息
+    batchQueryPackages：包裹条件查询接口
+        逻辑：根据用户ID，查询用户下所有未取走的包裹
 
 
 二、部署说明
@@ -54,40 +55,45 @@ sql脚本
 ##############hotel_package（包裹）###############
 CREATE TABLE IF NOT EXISTS hotel_package(
 id  INT UNSIGNED AUTO_INCREMENT,
-package_id VARCHAR(16) NOT NULL,
-package_status VARCHAR(32) NOT NULL,
-owner_id VARCHAR(32) NOT NULL,
-owner_type VARCHAR(64) NOT NULL,
-way_bill_id VARCHAR(64) NOT NULL,
-receive_id  VARCHAR(32) NOT NULL,
-receive_type   VARCHAR(64) NOT NULL,
-receive_date DATE,
-check_out_date  DATE,
-PRIMARY KEY (id )
+package_id VARCHAR(16) NOT NULL  COMMENT '包裹ID',
+package_status VARCHAR(32) NOT NULL  COMMENT '包裹状态',
+owner_id VARCHAR(32) NOT NULL  COMMENT '归属人ID',
+owner_type VARCHAR(64) NOT NULL  COMMENT '归属人类型',
+way_bill_id VARCHAR(64) NOT NULL COMMENT '运单号',
+receive_id  VARCHAR(32) NOT NULL COMMENT '收件人',
+receive_type   VARCHAR(64) NOT NULL COMMENT '收件人类型',
+receive_date DATE COMMENT '寄存日期',
+check_out_date  DATE COMMENT '取出日期',
+PRIMARY KEY (id ),
+INDEX  owner_status(owner_id, package_status),
+UNIQUE INDEX way_bill_id (way_bill_id),
+UNIQUE INDEX package_id (package_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ######hotel_customer(客户信息表)#####
 CREATE TABLE IF NOT EXISTS hotel_customer(
 id  INT UNSIGNED AUTO_INCREMENT,
-customer_id VARCHAR(16) NOT NULL,
-customer_name VARCHAR(100) NOT NULL,
-customer_status VARCHAR(32) NOT NULL,
-id_card_no VARCHAR(32) NOT NULL,
-check_in_status VARCHAR(32),
-check_in_date  DATE,
-check_out_date  DATE,
-PRIMARY KEY (id)
+customer_id VARCHAR(16) NOT NULL COMMENT '客户ID',
+customer_name VARCHAR(100) NOT NULL COMMENT '客户名称',
+customer_status VARCHAR(32) NOT NULL COMMENT '客户状态',
+id_card_no VARCHAR(32) NOT NULL COMMENT '身份证ID',
+check_in_status VARCHAR(32) COMMENT '入住状态',
+check_in_date  DATE COMMENT '入住日期',
+check_out_date  DATE COMMENT '离开日期',
+PRIMARY KEY (id),
+UNIQUE INDEX customer_id (customer_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 ###########柜子（存放包裹）#############
 CREATE TABLE IF NOT EXISTS hotel_cabinet(
 id  INT UNSIGNED AUTO_INCREMENT,
-cabinet_id VARCHAR(16) NOT NULL,
-size VARCHAR(32) NOT NULL,
-cabinet_status VARCHAR(32) NOT NULL,
-number  VARCHAR(32) NOT NULL,
-PRIMARY KEY (id)
+cabinet_id VARCHAR(16) NOT NULL COMMENT '柜子ID',
+size VARCHAR(32) NOT NULL COMMENT '容积',
+cabinet_status VARCHAR(32) NOT NULL COMMENT '柜子状态',
+number  VARCHAR(32) NOT NULL COMMENT '编号',
+PRIMARY KEY (id),
+UNIQUE INDEX cabinet_id (cabinet_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -95,10 +101,12 @@ PRIMARY KEY (id)
 ##########工单##########
 CREATE TABLE IF NOT EXISTS hotel_work_order(
 id  INT UNSIGNED AUTO_INCREMENT,
-order_id VARCHAR(16) NOT NULL,
-order_type VARCHAR(32) NOT NULL,
-request_id VARCHAR(128) NOT NULL,
-status  VARCHAR(32) NOT NULL,
-ext_info  VARCHAR(4000) ,
-PRIMARY KEY (id)
+order_id VARCHAR(16) NOT NULL COMMENT '工单ID',
+order_type VARCHAR(32) NOT NULL COMMENT '工单类型',
+request_id VARCHAR(128) NOT NULL COMMENT '请求ID',
+status  VARCHAR(32) NOT NULL COMMENT '工单状态',
+ext_info  VARCHAR(4000)  COMMENT '扩展信息',
+PRIMARY KEY (id),
+UNIQUE INDEX order_id (order_id),
+INDEX request_status(request_id, status)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
