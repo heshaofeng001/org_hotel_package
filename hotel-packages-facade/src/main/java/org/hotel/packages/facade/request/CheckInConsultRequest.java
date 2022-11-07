@@ -13,6 +13,9 @@ import java.util.List;
 public class CheckInConsultRequest extends BaseRequest{
 
 
+    /**
+     * 客户ID
+     */
     private String customerId;
 
     /**

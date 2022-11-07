@@ -13,6 +13,9 @@ import java.util.List;
 @Data
 public class BatchQueryPackagesRequest extends BaseRequest {
 
+    /**
+     * 客户ID
+     */
     private String customerId;
 
     /**

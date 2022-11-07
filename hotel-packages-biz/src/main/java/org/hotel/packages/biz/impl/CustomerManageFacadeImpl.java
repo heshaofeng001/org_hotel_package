@@ -21,6 +21,12 @@ import org.springframework.util.CollectionUtils;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 客户管理服务
+ *
+ * @author he_sh
+ * @version 2022-11月-05
+ **/
 @Service
 public class CustomerManageFacadeImpl extends FacadeExecuteTemplate implements CustomerManageFacade {
 

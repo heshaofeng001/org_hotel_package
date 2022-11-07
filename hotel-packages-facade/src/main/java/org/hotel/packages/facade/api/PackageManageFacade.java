@@ -9,12 +9,16 @@ import org.hotel.packages.facade.result.BatchQueryResult;
 import org.hotel.packages.facade.result.Result;
 
 /**
+ * 包裹管理接口
+ *
  * @author he_sh
  * @version 2022-11月-05
  **/
 public interface PackageManageFacade {
 
     /**
+     * 包裹是否可以代收咨询接口
+     *
      * @return
      */
     Result<String> checkInConsult(CheckInConsultRequest request);
