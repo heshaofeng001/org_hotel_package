@@ -25,20 +25,6 @@ spring:
         root: my-registry
         instanceHost: 139.224.250.223
         instance-ssl-port: 4003
-    gateway:
-      routes:
-        - id: student
-          uri: lb://rmx-student-manage
-          predicates:
-            - Path=/gateway/student/**
-          filters:
-            - StripPrefix=1
-        - id: login
-          uri: lb://rmx-student-manage
-          predicates:
-            - Path=/gateway/login/**
-          filters:
-            - StripPrefix=1
 
   datasource:
     jdbc-url : mysql://139.224.250.223:3306/hotel?useSSL=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai

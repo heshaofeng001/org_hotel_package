@@ -29,17 +29,17 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * ¹ñ×Ó·ÖÅä·şÎñ
- * <LI>·ÖÅäÔ­Ôò</LI>
+ * æŸœå­åˆ†é…æœåŠ¡
+ * <LI>åˆ†é…åŸåˆ™</LI>
  * <pre>
- *     1¡¢²éÑ¯Âú×ãÌõ¼ş£¨¹ñ×ÓÎª¿Õ×´Ì¬¡¢¹ñ×ÓµÄÈİ»ı´óÓÚ°ü¹üÈİ»ı×ÜºÍ£©µÄ¹ñ×Ó
- *     2¡¢ÓÅÏÈ·ÖÅäÈİ»ı×îĞ¡µÄ¹ñ×Ó
+ *     1ã€æŸ¥è¯¢æ»¡è¶³æ¡ä»¶ï¼ˆæŸœå­ä¸ºç©ºçŠ¶æ€ã€æŸœå­çš„å®¹ç§¯å¤§äºåŒ…è£¹å®¹ç§¯æ€»å’Œï¼‰çš„æŸœå­
+ *     2ã€ä¼˜å…ˆåˆ†é…å®¹ç§¯æœ€å°çš„æŸœå­
  * </pre>
  *
- * <LI>¹ñ×Ó·ÖÅä¾ß±¸ÃİµÈÄÜÁ¦£º°´workorderIDÃİµÈ</LI>
+ * <LI>æŸœå­åˆ†é…å…·å¤‡å¹‚ç­‰èƒ½åŠ›ï¼šæŒ‰workorderIDå¹‚ç­‰</LI>
  *
  * @author he_sh
- * @version 2022-11ÔÂ-05
+ * @version 2022-11æœˆ-05
  **/
 @Component
 public class CabinetAllocateService {
@@ -57,7 +57,7 @@ public class CabinetAllocateService {
     private WorkOrderRepository workOrderRepository;
 
     /**
-     * ÅĞ¶ÏÊÇ·ñÓĞ¿ÉÓÃ¹ñ×Ó
+     * åˆ¤æ–­æ˜¯å¦æœ‰å¯ç”¨æŸœå­
      *
      * @param packages
      * @return
@@ -68,7 +68,7 @@ public class CabinetAllocateService {
     }
 
     /**
-     * ¸ø¹¤µ¥·ÖÅä¹ñ×Ó
+     * ç»™å·¥å•åˆ†é…æŸœå­
      *
      * @param workOrderModel
      * @param packages
@@ -77,14 +77,14 @@ public class CabinetAllocateService {
     public Result<CabinetDTO> allocate(WorkOrderModel workOrderModel, List<PackageDTO> packages) {
         Result<CabinetDTO> allocateResult = new Result<CabinetDTO>();
 
-        //1¡¢ÖØ¸´·ÖÅäĞ£Ñé(ÒÑ¾­·ÖÅä¹ı£¬ÔòÖ±½Ó·µ»Ø¹ñ×Ó)
+        //1ã€é‡å¤åˆ†é…æ ¡éªŒ(å·²ç»åˆ†é…è¿‡ï¼Œåˆ™ç›´æ¥è¿”å›æŸœå­)
         CabinetDTO allocateCabinetDTO = duplicateCheck(workOrderModel);
         if (allocateCabinetDTO != null) {
             allocateResult.setData(allocateCabinetDTO);
             allocateResult.setSuccess(Boolean.TRUE);
             return allocateResult;
         }
-        //2¡¢Ñ¡Ôñ¹ñ×Ó
+        //2ã€é€‰æ‹©æŸœå­
         final CabinetDTO cabinetDTO = chooseCabinet(packages);
         if (cabinetDTO == null) {
             allocateResult.setSuccess(Boolean.FALSE);
@@ -96,16 +96,16 @@ public class CabinetAllocateService {
             @Override
             public CabinetModel doInTransaction(TransactionStatus transactionStatus) {
 
-                //1¡¢Ëø¶¨»õ¹ñ£¬±ÜÃâ²¢·¢·ÖÅä
+                //1ã€é”å®šè´§æŸœï¼Œé¿å…å¹¶å‘åˆ†é…
                 CabinetModel oldCabinetModel = cabinetRepository.lock(cabinetDTO.getCabinetId());
                 if (!StringUtils.equals(oldCabinetModel.getStatus().getCode(), CabinetStatusEnum.FREEDOM.getCode())) {
                     throw new RuntimeException();
                 }
-                //2¡¢´´½¨Ê¹ÓÃĞÅÏ¢
+                //2ã€åˆ›å»ºä½¿ç”¨ä¿¡æ¯
                 List<CabinetPackageRelationModel> relationModels = createRelation(cabinetDTO, packages);
                 cabinetPackageRelationRepository.batchSave(relationModels);
 
-                //3¡¢ĞŞ¸Ä»õ¹ñÊ¹ÓÃÖĞ×´Ì¬£¬±£´æ·ÖÅä¹ØÁª¹ØÏµ
+                //3ã€ä¿®æ”¹è´§æŸœä½¿ç”¨ä¸­çŠ¶æ€ï¼Œä¿å­˜åˆ†é…å…³è”å…³ç³»
                 oldCabinetModel.setStatus(CabinetStatusEnum.USING);
                 cabinetRepository.update(oldCabinetModel);
                 workOrderModel.getExtInfo().put(CommonConstants.CABINET_ID_KEY, cabinetDTO.getCabinetId());
@@ -119,17 +119,17 @@ public class CabinetAllocateService {
     }
 
     /**
-     * Ñ¡Ôñ¿ÉÓÃ¹ñ×Ó
+     * é€‰æ‹©å¯ç”¨æŸœå­
      *
      * @param packages
      * @return
      */
     public CabinetDTO chooseCabinet(List<PackageDTO> packages) {
 
-        //¼ÆËã°ü¹üµÄÈİ»ı×ÜºÍ
+        //è®¡ç®—åŒ…è£¹çš„å®¹ç§¯æ€»å’Œ
         String packageTotalSize = calculatePackageTotalSize(packages);
 
-        //²éÑ¯Èİ»ı´óÓÚ×ÜºÍ£¬ÇÒ¿ÕÏĞ×´Ì¬µÄ¹ñ×Ó
+        //æŸ¥è¯¢å®¹ç§¯å¤§äºæ€»å’Œï¼Œä¸”ç©ºé—²çŠ¶æ€çš„æŸœå­
         CabinetQueryCondition condition = new CabinetQueryCondition();
         condition.setMinSize(packageTotalSize);
         condition.setStatus(CabinetStatusEnum.FREEDOM.getCode());
@@ -138,7 +138,7 @@ public class CabinetAllocateService {
             return null;
         }
 
-        //3¡¢°´¹ñ×ÓµÄÈİ»ıÅÅĞò£¬ÓÅÏÈÊ¹ÓÃĞ¡µÄ¹ñ×Ó
+        //3ã€æŒ‰æŸœå­çš„å®¹ç§¯æ’åºï¼Œä¼˜å…ˆä½¿ç”¨å°çš„æŸœå­
         cabinetModels.sort(new Comparator<CabinetModel>() {
             @Override
             public int compare(CabinetModel o1, CabinetModel o2) {
@@ -150,9 +150,9 @@ public class CabinetAllocateService {
 
 
     /**
-     * <LI>ÖØ¸´·ÖÅäĞ£Ñé£¬Èç¹ûÖØ¸´£¬Ôò·µ»ØÒÑ¾­·ÖÅäµÄ</LI>
+     * <LI>é‡å¤åˆ†é…æ ¡éªŒï¼Œå¦‚æœé‡å¤ï¼Œåˆ™è¿”å›å·²ç»åˆ†é…çš„</LI>
      *
-     * <LI>@ TODO ´Ë´¦Ó¦¸Ã¸ÄÔì³É ¹ñ×ÓÊ¹ÓÃÁ÷³Ì£¬ÇëÇóID=workOrderModel£¬´Ó¶ø±ãÓÚ·´²î¹ñ×ÓµÄÖ÷ÈË </LI>
+     * <LI>@ TODO æ­¤å¤„åº”è¯¥æ”¹é€ æˆ æŸœå­ä½¿ç”¨æµç¨‹ï¼Œè¯·æ±‚ID=workOrderModelï¼Œä»è€Œä¾¿äºåå·®æŸœå­çš„ä¸»äºº </LI>
      *
      * @param workOrderModel
      * @return
@@ -164,12 +164,12 @@ public class CabinetAllocateService {
         }
         String enrolledCabinetId = workOrderModel.getExtInfo().get(CommonConstants.CABINET_ID_KEY);
         CabinetModel cabinetModel = cabinetRepository.queryByCabinetId(enrolledCabinetId);
-        Assert.notNull(cabinetModel, "¹ñ×ÓĞÅÏ¢ÓĞÎó");
+        Assert.notNull(cabinetModel, "æŸœå­ä¿¡æ¯æœ‰è¯¯");
         return CabinetConvertor.convertToDTO(cabinetModel);
     }
 
     /**
-     * Í¨¹ı¹ØÏµ£¬¿É²éÑ¯£º1¡¢°ü¹üÔÚÄÄ¸ö¹ñ×Ó£¬ 2¡¢¹ñ×ÓÖĞµÄ°ü¹üÊÇË­µÄ
+     * é€šè¿‡å…³ç³»ï¼Œå¯æŸ¥è¯¢ï¼š1ã€åŒ…è£¹åœ¨å“ªä¸ªæŸœå­ï¼Œ 2ã€æŸœå­ä¸­çš„åŒ…è£¹æ˜¯è°çš„
      *
      * @param cabinetDTO
      * @param packages
