@@ -3,7 +3,7 @@ server:
 #mysql
 spring:
   application:
-    name: rmx-student-manage
+    name: rmx-hotel-packages
   thymeleaf:
     prefix: classpath:/templates/
     encoding: UTF-8
@@ -22,7 +22,7 @@ spring:
       discovery:
         register: true
         enabled: true
-        root: my-registry
+        root: hsf-registry
         instanceHost: 139.224.250.223
         instance-ssl-port: 4003
 
