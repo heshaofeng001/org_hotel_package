@@ -110,3 +110,11 @@ PRIMARY KEY (id),
 UNIQUE INDEX order_id (order_id),
 INDEX request_status(request_id, status)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS hotel_cabinet_package_relation(
+id  INT UNSIGNED AUTO_INCREMENT,
+package_id VARCHAR(16) NOT NULL,
+cabinet_id VARCHAR(32) NOT NULL,
+status VARCHAR(32) NOT NULL,
+PRIMARY KEY (id )
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 2022-11月-05
  **/
 @RestController
-public class HelloWorldController {
+@RequestMapping("/hotel/packages/test")
+public class HelloWorldController extends BaseController{
 
     @RequestMapping("/hello")
     public String hello() {
