@@ -1,5 +1,6 @@
 package org.hotel.packages.biz.impl.template;
 
+import com.alibaba.fastjson.JSONObject;
 import org.hotel.packages.facade.request.BaseRequest;
 import org.hotel.packages.facade.result.BaseResult;
 import org.hotel.packages.model.exception.CommonErrorCodeEnum;
@@ -25,6 +26,8 @@ public class FacadeExecuteTemplate {
             validateRequest(request);
 
             callBack.onCall();
+
+            log.info("请求：" + JSONObject.toJSONString(request) + ";结果：" + JSONObject.toJSONString(result));
 
         } catch (PackageCommonException pe) {
             log.error("业务异常", pe);
