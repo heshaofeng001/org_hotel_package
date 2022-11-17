@@ -22,15 +22,27 @@
         </encoder>
     </appender>
 
+    <appender name="biz_file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/logback.%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
     <root level="info">
         <appender-ref ref="console" />
         <appender-ref ref="file" />
     </root>
 
-    <!-- logback为java中的包 -->
-    <logger name="com.dudu.controller"/>
+    <!-- biz的包 -->
+    <logger name="org.hotel.packages.biz">
+        <appender-ref ref="console" />
+        <appender-ref ref="biz_file" />
+    </logger>
     <!--logback.LogbackDemo：类的全路径 -->
-    <logger name="com.dudu.controller.LearnController" level="WARN" additivity="false">
+    <logger name="org.hotel.packages.core" level="WARN" additivity="false">
         <appender-ref ref="console"/>
     </logger>
 </configuration>
