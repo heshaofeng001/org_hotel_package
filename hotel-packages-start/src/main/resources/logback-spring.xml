@@ -37,12 +37,12 @@
     </root>
 
     <!-- biz的包 -->
-    <logger name="org.hotel.packages.biz">
+    <logger name="org.hotel.packages.biz"  level="DEBUG">
         <appender-ref ref="console" />
         <appender-ref ref="biz_file" />
     </logger>
     <!--logback.LogbackDemo：类的全路径 -->
-    <logger name="org.hotel.packages.core" level="WARN" additivity="false">
+    <logger name="org.hotel.packages.core" level="DEBUG" additivity="false">
         <appender-ref ref="console"/>
     </logger>
 </configuration>
